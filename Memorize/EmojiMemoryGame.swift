@@ -16,8 +16,8 @@ class EmojiMemoryGame {
     }
 
     init() {
-        let emojis = ["👻", "🎃"]
-        game = MemoryGame<String>(numberOfPairsOfCards: emojis.count) { emojis[$0] }
+        var emojis = ["👻", "🎃", "😈", "🙀", "🧙‍♀️"]
+        game = MemoryGame<String>(numberOfPairsOfCards: Int.random(in: 2...5)) {_ in emojis.remove(at: Int.random(in: emojis.indices)) }
     }
 
     func choose(card: MemoryGame<String>.Card) {

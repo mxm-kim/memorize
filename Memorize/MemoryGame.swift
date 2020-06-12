@@ -12,11 +12,16 @@ struct MemoryGame<CardContent> {
     var cards: Array<Card>
 
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
-        cards = Array<Card>()
+        var unShuffledCards = Array<Card>()
         for indexOfPair in 0..<numberOfPairsOfCards {
             let content = cardContentFactory(indexOfPair)
-            cards.append(Card(content: content, id: indexOfPair*2))
-            cards.append(Card(content: content, id: indexOfPair*2 + 1))
+            unShuffledCards.append(Card(content: content, id: indexOfPair*2))
+            unShuffledCards.append(Card(content: content, id: indexOfPair*2 + 1))
+        }
+
+        cards = Array<Card>()
+        for _ in unShuffledCards.indices {
+            cards.append(unShuffledCards.remove(at: Int.random(in: 0..<unShuffledCards.count)))
         }
     }
 
