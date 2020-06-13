@@ -8,15 +8,15 @@
 
 import Foundation
 
-class EmojiMemoryGame {
-    private var game: MemoryGame<String>
+class EmojiMemoryGame: ObservableObject {
+    @Published private var game: MemoryGame<String>
 
     var cards: Array<MemoryGame<String>.Card> {
         return game.cards
     }
 
     init() {
-        var emojis = ["👻", "🎃", "😈", "🙀", "🧙‍♀️"]
+        var emojis = ["👻", "🎃", "😈", "🙀", "🧙‍♀️", "🕷"]
         game = MemoryGame<String>(numberOfPairsOfCards: Int.random(in: 2...5)) {_ in emojis.remove(at: Int.random(in: emojis.indices)) }
     }
 
