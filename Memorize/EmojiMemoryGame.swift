@@ -17,7 +17,8 @@ class EmojiMemoryGame: ObservableObject {
 
     init() {
         var emojis = ["👻", "🎃", "😈", "🙀", "🧙‍♀️", "🕷"]
-        game = MemoryGame<String>(numberOfPairsOfCards: Int.random(in: 2...5)) {_ in emojis.remove(at: Int.random(in: emojis.indices)) }
+        let numberOfPairs = Int.random(in: 2...5)
+        game = MemoryGame<String>(numberOfPairsOfCards: numberOfPairs) {_ in emojis.remove(at: Int.random(in: emojis.indices)) }
     }
 
     func choose(card: MemoryGame<String>.Card) {

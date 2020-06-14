@@ -11,42 +11,45 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var emojiGame: EmojiMemoryGame
     var body: some View {
-        HStack {
-            ForEach(emojiGame.cards) { card in
-                CardView(card: card).onTapGesture {
-                    self.emojiGame.choose(card: card)
-                }
+        GridView(emojiGame.cards) { card in
+            CardView(card: card).onTapGesture {
+                self.emojiGame.choose(card: card)
             }
         }
         .padding()
         .foregroundColor(Color.orange)
-        .font(font)
-    }
-
-    var font: Font {
-        let font: Font!
-        if emojiGame.cards.count < 10 {
-            font = Font.largeTitle
-        } else {
-            font = Font.body
-        }
-        return font
     }
 }
 
 struct CardView: View {
+    let cornerRadius: CGFloat = 10.0
+    let borderWidth: CGFloat = 3.0
+
     var card: MemoryGame<String>.Card
 
     var body: some View {
+        GeometryReader { geometry in
+            self.body(for: geometry.size)
+        }
+    }
+
+    func body(for size: CGSize) -> some View {
         ZStack {
             if card.isFaceUp {
-                RoundedRectangle(cornerRadius: 10.0).fill(Color.white)
-                RoundedRectangle(cornerRadius: 10.0).stroke(lineWidth: 3)
+                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
+                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: borderWidth)
                 Text(card.content)
-            } else {
-                RoundedRectangle(cornerRadius: 10.0).fill()
+            } else if !card.isMatched {
+                RoundedRectangle(cornerRadius: cornerRadius).fill()
             }
-        }.aspectRatio(2/3, contentMode: .fit)
+        }
+        .font(self.font(for: size))
+        .padding(5.0)
+    }
+
+    func font(for size: CGSize) -> Font {
+        let fontSize = min(size.width, size.height) * 0.75
+        return Font.system(size: fontSize)
     }
 }
 

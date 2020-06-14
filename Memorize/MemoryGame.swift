@@ -8,8 +8,18 @@
 
 import Foundation
 
-struct MemoryGame<CardContent> {
+struct MemoryGame<CardContent> where CardContent: Equatable {
     var cards: Array<Card>
+    var indexOfTheOneAndOnlyFaceUpCard: Int? {
+        get {
+            return cards.indices.filter({ cards[$0].isFaceUp }).only
+        }
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = newValue == index
+            }
+        }
+    }
 
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         var unShuffledCards = Array<Card>()
@@ -21,25 +31,29 @@ struct MemoryGame<CardContent> {
 
         cards = Array<Card>()
         for _ in unShuffledCards.indices {
-            cards.append(unShuffledCards.remove(at: Int.random(in: 0..<unShuffledCards.count)))
+            let randomIndex = Int.random(in: 0..<unShuffledCards.count)
+            cards.append(unShuffledCards.remove(at: randomIndex))
         }
     }
 
     mutating func choose(card: Card) {
-        guard let chosenIndex = index(of: card) else {
-            return
+        if let chosenIndex = cards.firstIndex(matching: card),
+            !cards[chosenIndex].isFaceUp, !cards[chosenIndex].isMatched {
+
+            if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
+                if cards[potentialMatchIndex].content == cards[chosenIndex].content {
+                    cards[chosenIndex].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                }
+                cards[chosenIndex].isFaceUp = true
+            } else {
+                indexOfTheOneAndOnlyFaceUpCard = chosenIndex
+            }
         }
-
-        cards[chosenIndex].isFaceUp = !cards[chosenIndex].isFaceUp
     }
-
-    func index(of card: Card) -> Int? {
-        cards.firstIndex(where: { $0.id == card.id })
-    }
-
 
     struct Card: Identifiable {
-        var isFaceUp = true
+        var isFaceUp = false
         var isMatched = false
         var content: CardContent
         var id: Int
