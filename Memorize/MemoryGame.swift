@@ -34,7 +34,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         for _ in unShuffledCards.indices {
             let randomIndex = Int.random(in: 0..<unShuffledCards.count)
             cards.append(unShuffledCards.remove(at: randomIndex))
-        }
+        } 
     }
 
     mutating func choose(card: Card) {
@@ -47,7 +47,16 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     cards[potentialMatchIndex].isMatched = true
                     score += 2
                 } else {
-                    score -= 1
+                    if cards[chosenIndex].isSeen {
+                        score -= 1
+                    }
+
+                    if cards[potentialMatchIndex].isSeen {
+                        score -= 1
+                    }
+
+                    cards[chosenIndex].isSeen = true
+                    cards[potentialMatchIndex].isSeen = true
                 }
                 cards[chosenIndex].isFaceUp = true
             } else {
@@ -59,6 +68,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     struct Card: Identifiable {
         var isFaceUp = false
         var isMatched = false
+        var isSeen = false
         var content: CardContent
         var id: Int
     }
