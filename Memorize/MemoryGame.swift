@@ -20,6 +20,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             }
         }
     }
+    var score: Int = 0
 
     init(numberOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         var unShuffledCards = Array<Card>()
@@ -44,6 +45,9 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[potentialMatchIndex].content == cards[chosenIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
+                    score += 2
+                } else {
+                    score -= 1
                 }
                 cards[chosenIndex].isFaceUp = true
             } else {

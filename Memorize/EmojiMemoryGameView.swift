@@ -11,13 +11,25 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var emojiGame: EmojiMemoryGame
     var body: some View {
-        GridView(emojiGame.cards) { card in
-            CardView(card: card).onTapGesture {
-                self.emojiGame.choose(card: card)
+        VStack {
+            Text(emojiGame.chosenTheme)
+                .font(Font.largeTitle)
+            GridView(emojiGame.cards) { card in
+                CardView(card: card).onTapGesture {
+                    self.emojiGame.choose(card: card)
+                }
+            }
+                .padding()
+                .foregroundColor(Color.orange)
+            Text("Score: \(String(emojiGame.score))")
+                .font(Font.body)
+            Button(action: {
+                self.emojiGame.startNewGame()
+            }) {
+                Text("New game")
+                    .font(Font.title)
             }
         }
-        .padding()
-        .foregroundColor(Color.orange)
     }
 }
 
