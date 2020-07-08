@@ -19,6 +19,7 @@
 		3B80A3CE249397A4003DDE7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B80A3CC249397A4003DDE7D /* LaunchScreen.storyboard */; };
 		3B80A3D824939815003DDE7D /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B80A3D724939815003DDE7D /* MemoryGame.swift */; };
 		3B80A3DA2493989B003DDE7D /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B80A3D92493989B003DDE7D /* EmojiMemoryGame.swift */; };
+		3B90C5EA24B5B3B40097BE86 /* Cardify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B90C5E924B5B3B40097BE86 /* Cardify.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		3B80A3CF249397A4003DDE7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B80A3D724939815003DDE7D /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		3B80A3D92493989B003DDE7D /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
+		3B90C5E924B5B3B40097BE86 /* Cardify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cardify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				3B40684A2496373A007A69F6 /* GridView.swift */,
 				3B406848249636D5007A69F6 /* GridLayout.swift */,
 				3B80A3C5249397A2003DDE7D /* EmojiMemoryGameView.swift */,
+				3B90C5E924B5B3B40097BE86 /* Cardify.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				3B80A3D824939815003DDE7D /* MemoryGame.swift in Sources */,
 				3B80A3C6249397A2003DDE7D /* EmojiMemoryGameView.swift in Sources */,
 				3B406849249636D5007A69F6 /* GridLayout.swift in Sources */,
+				3B90C5EA24B5B3B40097BE86 /* Cardify.swift in Sources */,
 				3B406847249635F4007A69F6 /* Array+Identifiable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
