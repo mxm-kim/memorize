@@ -16,6 +16,9 @@ struct Cardify: ViewModifier {
             if isFaceUp {
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
                 RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: borderWidth)
+                Pie(startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 130), clockwise: true)
+                    .padding(3.0)
+                    .opacity(0.7)
                 content
             } else {
                 RoundedRectangle(cornerRadius: cornerRadius).fill()
